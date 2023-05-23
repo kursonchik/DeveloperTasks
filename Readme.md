@@ -15,5 +15,5 @@ Task 4 – Problem-solving
 ***
 <h4> Solution:</h4>
 
-![Console!]([/assets/images/Untitled1.png](https://github.com/kursonchik/DeveloperTasks/blob/1/OOPexample/assets/images/Untitled1.png))
-![Console!](/assets/images/Untitled11.png)
+![Console!](./assets/images/Untitled1.png)
+![Console!](./assets/images/Untitled11.png)
