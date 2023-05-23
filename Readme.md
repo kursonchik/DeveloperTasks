@@ -5,15 +5,15 @@
 
 <h4> Main functionality:</h4>
 
-Task 1 – Design
+Task 1 â€“ Design
 ***
-Task 2 – Reflection
+Task 2 â€“ Reflection
 ***
-Task 3 – Functionality
+Task 3 â€“ Functionality
 ***
-Task 4 – Problem-solving
+Task 4 â€“ Problem-solving
 ***
 <h4> Solution:</h4>
 
-![Console!](/assets/images/Untitled1.png)
+![Console!]([/assets/images/Untitled1.png](https://github.com/kursonchik/DeveloperTasks/blob/1/OOPexample/assets/images/Untitled1.png))
 ![Console!](/assets/images/Untitled11.png)
