@@ -5,13 +5,10 @@
 
 <h4> Main functionality:</h4>
 
-Task 1 – Design
-***
-Task 2 – Reflection
-***
-Task 3 – Functionality
-***
-Task 4 – Problem-solving
+* Task 1 – Design
+* Task 2 – Reflection
+* Task 3 – Functionality
+* Task 4 – Problem-solving
 ***
 <h4> Solution:</h4>
 
