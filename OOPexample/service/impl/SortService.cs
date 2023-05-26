@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Task1.entity;
+﻿using Task1.entity;
 using Task1.service.interfaces;
 
 namespace Task1.service.impl
@@ -13,22 +12,7 @@ namespace Task1.service.impl
             return originalList;
         }
 
-        // Task 3.2 Search for types by specifying part of the name
-        public static Type GetTypeByName(string Name)
-        {
-            Assembly OurAssembly = Assembly.GetExecutingAssembly();
-            foreach (TypeInfo DefinedType in OurAssembly.DefinedTypes)
-            {
-                if (DefinedType.Name.Contains(Name))
-                  
-                {
-                    return DefinedType;
-                    
-                }
-            }
-
-            return null;
-        }
+        
     }
 }
 

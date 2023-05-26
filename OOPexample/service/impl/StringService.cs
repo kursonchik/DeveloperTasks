@@ -1,4 +1,7 @@
-﻿namespace Task1.service.impl
+﻿using Microsoft.Extensions.Logging;
+using System;
+
+namespace Task1.service.impl
 {
     public static class StringService
     {
@@ -13,56 +16,50 @@
             return "Task 4.1 ReverseString: " + '\n' + "Original string: " + s + '\n' + "New string: " + new string(chars);
         }
 
-        public static bool IsPalRec(String s,
-                             int first,
-                             int last)
-        {
-
-            if (first == last)
-                return true;
-
-            if ((s[first]) != (s[last]))
-                return false;
-
-            if (first < last + 1)
-                return IsPalRec(s, first + 1,
-                                last - 1);
-            return true;
-        }
-
         // Task 4.2 Checks the input string is a palindrome
         public static bool IsPalindrome(String s)
         {
-            int n = s.Length;
+            var middle = s.Length / 2;
 
-            if (n == 0)
-                return true;
+            for (var i = 0; i <= middle; i++)
+            {
+                if (s[i] != s[s.Length - i - 1])
+                {
+                    return false;
+                }
+            }
 
-            return IsPalRec(s, 0, n - 1);
+            return true;
         }
-
+       
+     
         // Task 4.3 find Missing Elements in the <int> array
-        public static IEnumerable<int> MissingElements(this int[] arr)
+        public static IEnumerable<int> MissingElements(this int[] arr) 
         {
-            List<int> list = new List<int>();
-            list.AddRange(arr);
+                List<int> list = new List<int>();
+                list.AddRange(arr);
 
-            list.Sort();
+                list.Sort();
 
-            var firstNumber = list.First();
+                var firstNumber = list.First();
 
-            var lastNumber = list.Last();
+                var lastNumber = list.Last();
 
-            // Range that contains all numbers in the interval
-            var range = Enumerable.Range(firstNumber, lastNumber - firstNumber);
+                // Range that contains all numbers in the interval
+                var range = Enumerable.Range(firstNumber, lastNumber - firstNumber);
 
-            // Getting the set difference
-            var missingNumbers = range.Except(list);
+                // Getting the set difference
+                var missingNumbers = range.Except(list);
 
-            Console.Write("\nMissing Elements : ");
-
-            return missingNumbers;
-        }
+                Console.Write("\nMissing Elements : ");
+           
+            if (missingNumbers == null || !missingNumbers.Any())
+                {
+                Console.WriteLine("[]");
+                }
+                
+                return missingNumbers;
+            }
 
     }
 }

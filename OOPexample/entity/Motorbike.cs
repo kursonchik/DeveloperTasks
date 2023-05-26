@@ -1,25 +1,26 @@
-﻿namespace Task1.entity
+﻿using Task1.@interface;
+
+namespace Task1.entity
 {
-    public class Motorbike : Vehicle, @interface.InterfaceInformation
+    public class Motorbike : Vehicle, @IInformation
     {
-        private string SidecarForMotorbike { get; set; }
-
-        public Motorbike(string nameValue, string modelValue, int horsePowersValue, int maxSpeedValue)
-    : base(nameValue, modelValue, maxSpeedValue)
+        private int MaxSpeed { get; }
+        private string SidecarForMotorbike { get; }
+        public Motorbike() : base("Motorbike", 2)
         {
-            //  Console.WriteLine("Motorbike constructor");
+            MaxSpeed = 150;
+            SidecarForMotorbike = "\"java\"";
+        }
+        override
+        public void Representation()
+        {
+            base.Representation();
 
-            this.SidecarForMotorbike = "java";
-            this.MaxSpeed = 130;
+            Console.WriteLine("Name of Sidecar For Motorbike:" + SidecarForMotorbike + '\n' + "Max Speed:" + MaxSpeed);
+            Console.WriteLine("--------------------");
         }
 
-        private void representation()
-        {
-            base.representation();
 
-            Console.WriteLine("sidecar For Motorbike: " + SidecarForMotorbike);
-            Console.WriteLine("Max Speed: " + MaxSpeed);
-        }
 
     }
 }

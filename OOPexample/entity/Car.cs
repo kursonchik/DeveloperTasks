@@ -1,27 +1,31 @@
-﻿namespace Task1.entity
+﻿using System.Diagnostics;
+using Task1.@interface;
+
+namespace Task1.entity
 {
-    public class Car : Vehicle, @interface.InterfaceInformation
+    public class Car : Vehicle, @IInformation
+
     {
-        private int HorsePowers { get; set; }
+        private int MaxSpeed { get; set; }
+        private int Doors { get; set; }
 
-        public Car(string nameValue, string modelValue, int horsePowersValue, int maxSpeedValue)
-    : base(nameValue, modelValue, maxSpeedValue)
+        public Car() : base("Car", 4)
         {
-            //   Console.WriteLine("Car constructor");
-
-            this.HorsePowers = 75;
-            this.MaxSpeed= 150;
-
+            MaxSpeed = 150;
+            Doors = 4;
         }
-
-        private void representation()
+        override
+        public void Representation()
         {
-            base.representation();
+            base.Representation();
 
-            Console.WriteLine("Horse Powers: " + HorsePowers);
-            Console.WriteLine("Max Speed: " + MaxSpeed);
+            Console.WriteLine("Doors:" + Doors + '\n' + "Max Speed:" + MaxSpeed);
+            Console.WriteLine("--------------------");
         }
 
     }
+    
+
 }
+
 
