@@ -1,55 +1,56 @@
-﻿namespace Task1.service.impl
+﻿using System.Text.Json;
+
+namespace Task1.service.impl
 {
     public static class InstanceService
     {
-        // Task 2.1 Returns instances of all classes of type T
+
+        // Task 2.1 Returns instances of all classes of type T 
         public static IEnumerable<T> GetInstances<T>()
         {
+            var assembly = typeof(T).Assembly; 
 
-            var interfaceType = typeof(T);
-            List<T> list = new List<T>();
-            Console.WriteLine("Interface type: " + interfaceType.ToString());
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (var assembly in assemblies)
+            foreach (var type in assembly.GetTypes()) 
             {
-                Console.WriteLine("Assembly: " + assembly.ToString());
-                if (assembly.GetType().IsAbstract)
+                if (typeof(T).IsAssignableFrom(type))
                 {
-                    var instance = (T)Activator.CreateInstance(assembly.GetType());
-                    list.Add(instance);
+                    yield return (T)Activator.CreateInstance(type);
+
                 }
             }
-
-            return list;
         }
+
+
+        // Task 3.2 Search for types by specifying part of the name
+        public static Type GetTypeByName(string namePart)
+        {
+            return AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(a => a.GetTypes())
+                .FirstOrDefault(t => t.Name.IndexOf(namePart, StringComparison.OrdinalIgnoreCase) >= 0); //case-insensitive
+        }
+
 
         // Task 3.3 Writes all instances returned from GetInstances<T>() to disk.
-        public static void ExportToTextFile<T>(this IEnumerable<T> list, string FileName, char ColumnSeperator)
+        public static void ExportToTextFile<T>(string fileName)
         {
-            using (var sw = File.CreateText(FileName))
+            var instances = GetInstances<T>().ToList();
+
+            using (var writer = new StreamWriter(fileName))
             {
-                var plist = typeof(T).GetProperties().Where(p => p.CanRead && (p.PropertyType.IsValueType || p.PropertyType == typeof(string)) && p.GetIndexParameters().Length == 0).ToList();
-                if (plist.Count > 0)
+                foreach (var instance in instances)
                 {
-                    var seperator = ColumnSeperator.ToString();
-                    sw.WriteLine(string.Join(seperator, plist.Select(p => p.Name)));
-                    foreach (var item in list)
-                    {
-                        var values = new List<object>();
-                        foreach (var p in plist) values.Add(p.GetValue(item, null));
-                        sw.WriteLine(string.Join(seperator, values));
-                    }
-
+                    var json = JsonSerializer.Serialize(instance);
+                    writer.WriteLine(json);
                 }
+                
             }
-            Console.WriteLine("Done. File has been created with path: " + FileName + '\n' + "");
+            Console.WriteLine("Done. File has been created with path: " + fileName + '\n' + "");
 
-            // Read this file in console
-
-            Console.WriteLine("Read created file:" + '\n' + "" + File.ReadAllText(FileName));
-            }
+            Console.WriteLine("Read created file:" + '\n' + "" + File.ReadAllText(fileName));
         }
+
     }
+}
 
 
 

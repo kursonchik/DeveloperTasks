@@ -1,41 +1,24 @@
-﻿using Task1.@interface;
+﻿using System.Reflection;
+using Task1.@interface;
 
 namespace Task1.entity
 {
-    public class Vehicle : InterfaceInformation
+    public abstract class Vehicle
     {
-        public string Name { get; set; }
-        public string Model { get; set; }
-        public int MaxSpeed { get; set; }
+        public string Name { get; }
+        public int Wheels { get; }
 
-        public Vehicle(string nameValue, string modelValue, int maxSpeedValue)
+        public Vehicle(string nameValue, int wheelsValue)
         {
             this.Name = nameValue;
-            this.Model = modelValue;
-            this.MaxSpeed = maxSpeedValue;
 
-          //  Console.WriteLine("Vehicle constructor");
+            this.Wheels = wheelsValue;
 
         }
-
-        public void representation()
+        public virtual void Representation()
         {
-            Console.WriteLine("Brand: " + Name);
-            Console.WriteLine("Model: " + Model);
-            
-        }
+            Console.WriteLine("Type:" + Name + '\n' + "Wheels:" + Wheels);
 
-        public override bool Equals(object? obj)
-        {
-            return obj is Vehicle vehicle &&
-                   Name == vehicle.Name &&
-                   Model == vehicle.Model &&
-                   MaxSpeed == vehicle.MaxSpeed;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Name, Model, MaxSpeed);
         }
     }
 }

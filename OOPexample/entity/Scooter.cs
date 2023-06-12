@@ -1,26 +1,27 @@
-﻿namespace Task1.entity
+﻿using Task1.@interface;
+
+namespace Task1.entity
 {
-    public class Scooter : Vehicle, @interface.InterfaceInformation
-    { 
-     private bool IsGlowingWheels { get; set; }
-
-        public Scooter(string nameValue, string modelValue, int horsePowersValue, int maxSpeedValue)
-: base(nameValue, modelValue, maxSpeedValue)
+    public class Scooter : Vehicle, @IInformation
     {
-     //   Console.WriteLine("Scooter constructor");
+        private int MaxSpeed { get; }
+        private bool IsGlowingWheels { get; }
+        public Scooter() : base("Scooter", 2)
+        {
+            MaxSpeed = 150;
+            IsGlowingWheels = true;
+        }
+        override
+        public void Representation()
+        {
+            base.Representation();
 
-        this.IsGlowingWheels = true;
-        this.MaxSpeed = 30;
+            Console.WriteLine("Glowing Wheels:" + IsGlowingWheels + '\n' + "Max Speed:" + MaxSpeed);
+            Console.WriteLine("--------------------");
+        }
+
     }
 
-    private void representation()
-    {
-        base.representation();
-
-        Console.WriteLine("Scooter with Glowing Wheels: " + IsGlowingWheels);
-        Console.WriteLine("Max Speed: " + MaxSpeed);
     }
 
-}
-}
 
